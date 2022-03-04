@@ -228,27 +228,25 @@ $(".card .list-group").sortable({
   scroll: false,
   tolerance: "pointer",
   helper: "clone",
-  activate: function(event) {
+  activate: function(event, ui) {
     $(this).addClass("dropover");
-    $("bottom-trash").addClass("bottom-trash-drag");
-    console.log("activate", this);
+    $(".bottom-trash").addClass("bottom-trash-drag");
+    // console.log("activate", this);
   },
-  deactivate: function(event) {
+  deactivate: function(event, ui) {
     $(this).removeClass("dropover");
-    $("bottom-trash").removeClass("bottom-trash-drag");
-    console.log("deactivate", this);
+    $(".bottom-trash").removeClass("bottom-trash-drag");
+    // console.log("deactivate", this);
   },
   over: function(event) {
     $(event.target).addClass("dropover-active");
-    $("bottom-trash").addClass("bottom-trash-active");
-    console.log("over", event.target);
+    // console.log("over", event.target);
   },
   out: function(event) {
     $(event.target).removeClass("dropover-active");
-    $("bottom-trash").removeClass("bottom-trash-active");
-    console.log("out", event.target);
+    // console.log("out", event.target);
   },
-  update: function(event) {
+  update: function() {
     // array to store the task data in
     var tempArr = [];
 
@@ -290,17 +288,20 @@ $("#trash").droppable({
   tolerance: "touch",
   // user trying to delete a task noted here!
   drop: function(event, ui) {
-    console.log("drop");
     ui.draggable.remove();
+    // console.log("drop");
   },
   over: function(event, ui) {
-    console.log("over");
+    $(".bottom-trash").addClass("bottom-trash-active");
+    // console.log("over");
   },
   out: function(event, ui) {
-    console.log("out");
+    $(".bottom-trash").removeClass("bottom-trash-active");
+    // console.log("out");
   }
 });
 
+// convert text field into a jquery date picker
 $("#modalDueDate").datepicker( {
   minDate: 1
 });
