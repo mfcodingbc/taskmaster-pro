@@ -71,7 +71,7 @@ var auditTask = function(taskEl) {
   };
 
   // to ensure element is getting to the function
-  // console.log(taskEl);
+  console.log(taskEl);
 };
 
 $(".list-group").on("click", "p",function() {
@@ -300,4 +300,9 @@ $("#modalDueDate").datepicker( {
 // load tasks for the first time
 loadTasks();
 
-
+setInterval(function() {
+  $(".card .list-group-item").each(function(index, el) {
+    auditTask(el);
+  });
+  // set time duration in milliseconds, for longer times, use math equation (1000 (milliseconds) * 60 (seconds)) which = 1 minute. Multiply this with number of minutes desired
+}, (1000 * 60) * 30);
